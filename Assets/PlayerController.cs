@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKey(KeyCode.A)){
             // rb.velocity=new Vector2(-5,0);
             rb.velocity = new Vector2(-5, rb.velocity.y);
+            transform.localScale=new Vector2(-1,1);
         }
         if(Input.GetKey(KeyCode.D)){
             // rb.velocity=new Vector2(-5,0);
@@ -16,7 +17,7 @@ public class PlayerController : MonoBehaviour
         }
         if(Input.GetKey(KeyCode.W)){
             // rb.velocity=new Vector2(-5,0);
-            rb.velocity = new Vector2(0, 5);
+            rb.velocity = new Vector2(rb.velocity.x, 5);
         }
     }
 }
