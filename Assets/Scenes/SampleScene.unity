@@ -395,8 +395,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcb18ceb64de254a9d63c92a7f7b75d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 689015266}
-  anim: {fileID: 689015269}
 --- !u!95 &689015269
 Animator:
   serializedVersion: 3
@@ -430,7 +428,7 @@ GameObject:
   - component: {fileID: 764558389}
   - component: {fileID: 764558391}
   - component: {fileID: 764558390}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: foreground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
