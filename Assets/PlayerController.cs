@@ -7,8 +7,13 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private Collider2D coll;
-    [SerializeField] private LayerMask ground;
 
+    //serialize variables
+    [SerializeField] private LayerMask ground;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private float jumpforce = 10f;
+
+    //Finite state  machine
     private enum State { idle, running, jumping, falling }
     private State state=State.idle;
 
@@ -18,28 +23,37 @@ public class PlayerController : MonoBehaviour
         coll= GetComponent<Collider2D>();
     }
 
-    private void Update(){
+    private void Update()
+    {
 
-        float HDirection=Input.GetAxis("Horizontal");
-
-        if(HDirection<0){
-            rb.velocity = new Vector2(-5, rb.velocity.y);
-            transform.localScale=new Vector2(-1,1);
-           
-        }
-        else if(HDirection>0){
-            rb.velocity = new Vector2(5, rb.velocity.y);
-            transform.localScale=new Vector2(1,1);
-            
-        }else{
-
-        }
-        if(Input.GetButtonDown("Jump") && coll.IsTouchingLayers(ground)){
-            rb.velocity = new Vector2(rb.velocity.x, 10f);
-            state=State.jumping;
-        }
+        float HDirection = Input.GetAxis("Horizontal");
+        inputs_manager(HDirection);
         velocityState();
-        anim.SetInteger("state",(int)state);
+        anim.SetInteger("state", (int)state);
+    }
+
+    private void inputs_manager(float HDirection)
+    {
+        //left move
+        if (HDirection < 0)
+        {
+            rb.velocity = new Vector2(-speed, rb.velocity.y);
+            transform.localScale = new Vector2(-1, 1);
+
+        }
+        //right move
+        if (HDirection > 0)
+        {
+            rb.velocity = new Vector2(speed, rb.velocity.y);
+            transform.localScale = new Vector2(1, 1);
+
+        }
+        //jump action
+        if (Input.GetButtonDown("Jump") && coll.IsTouchingLayers(ground))
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpforce);
+            state = State.jumping;
+        }
     }
 
     private void velocityState(){
