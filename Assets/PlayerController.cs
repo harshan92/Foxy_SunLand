@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private Collider2D coll;
     [SerializeField] private LayerMask ground;
 
-    private enum State { idle, running, jumping }
+    private enum State { idle, running, jumping, falling }
     private State state=State.idle;
 
     private void Start() {
@@ -44,6 +44,18 @@ public class PlayerController : MonoBehaviour
 
     private void velocityState(){
         if(state==State.jumping){
+
+            if (rb.velocity.y < .1f)
+            {
+                state = State.falling;
+            }
+
+        }else if (state==State.falling)
+        {
+            if (coll.IsTouchingLayers(ground))
+            {
+                state = State.idle;
+            }
 
         }else if(Mathf.Abs(rb.velocity.x) > 2f){
             state=State.running;
