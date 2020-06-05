@@ -398,6 +398,8 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 256
+  speed: 5
+  jumpforce: 10
 --- !u!95 &689015269
 Animator:
   serializedVersion: 3
